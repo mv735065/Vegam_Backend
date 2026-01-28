@@ -5,7 +5,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: '*', // TEMP (lock later)
+   origin: [
+    'https://vegam-frontend.vercel.app/',
+    'http://localhost:5173',
+  ],
   });
 
   const port = process.env.PORT || 3000;
