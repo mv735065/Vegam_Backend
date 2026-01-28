@@ -8,12 +8,16 @@ export class MailService {
 
   constructor(private configService: ConfigService) {
     this.transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: this.configService.get('EMAIL_USER'),
-        pass: this.configService.get('EMAIL_PASS'),
-      },
-    });
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // MUST be false for 587
+  auth: {
+    user: this.configService.get('EMAIL_USER'),
+    pass: this.configService.get('EMAIL_PASS'),
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+});
   }
 
 async sendQuoteEmail(data: any) {
